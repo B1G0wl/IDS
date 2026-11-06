@@ -1,0 +1,31 @@
+<section class="page">
+  <h1>🧠 Model Training Dashboard</h1>
+  <p>View or retrain the ML model used by IDS for flow classification.</p>
+
+  <div class="card">
+    <h3>Training Info</h3>
+    <p><strong>Model File:</strong> ml_model.pkl</p>
+    <p><strong>Last Trained:</strong> <span id="lastTrainTime">Loading...</span></p>
+    <p><strong>Algorithm:</strong> RandomForestClassifier</p>
+    <button id="trainBtn">🔄 Retrain Model</button>
+  </div>
+
+  <div class="card wide">
+    <h3>Training Logs</h3>
+    <pre id="trainLogs"></pre>
+  </div>
+
+  <script>
+    const logs = document.getElementById('trainLogs');
+    const timeEl = document.getElementById('lastTrainTime');
+
+    timeEl.textContent = new Date().toLocaleString();
+
+    document.getElementById('trainBtn').addEventListener('click', async () => {
+      logs.textContent += "\\n[+] Retraining started...\\n";
+      const res = await fetch('/retrain', { method: 'POST' }).catch(()=>null);
+      if (!res || !res.ok) logs.textContent += "[❌] Retrain failed or endpoint missing.\\n";
+      else logs.textContent += "[✅] Model retrained successfully!\\n";
+    });
+  </script>
+</section>

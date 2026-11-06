@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Network Threat & Flow Analysis | IDS Dashboard</title>
+  <link rel="stylesheet" href="static/analysis.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Sidebar (shared across pages) -->
+    <aside class="sidebar">
+      <h2>🛡 IDS Dashboard</h2>
+      <ul>
+        <li onclick="navigate('dashboard')">Dashboard</li>
+        <li class="active" onclick="navigate('analysis')">Analysis</li>
+        <li onclick="navigate('training')">Training</li>
+        <li onclick="navigate('dataset')">Dataset</li>
+        <li onclick="navigate('settings')">Settings</li>
+      </ul>
+      <button class="clear-btn" onclick="clearData()">Clear Logs</button>
+    </aside>
+
+    <!-- Main Page -->
+    <main class="page-analysis">
+      <header class="page-header">
+        <h1>Network Threat & Flow Analysis</h1>
+        <p class="muted">
+          Real-time visualization of intrusion detections, packet flow volume, and system confidence metrics.
+        </p>
+      </header>
+
+      <!-- Summary Cards -->
+      <div class="cards">
+        <div class="card safe">
+          <h3>Total Flows</h3>
+          <p id="totalFlows" class="metric">0</p>
+        </div>
+        <div class="card alert">
+          <h3>Alerts Detected</h3>
+          <p id="alertCount" class="metric">0</p>
+        </div>
+        <div class="card">
+          <h3>Avg Confidence</h3>
+          <p id="avgConfidence" class="metric">0%</p>
+        </div>
+      </div>
+
+      <!-- Charts Grid -->
+      <div class="analysis-grid">
+        <div class="card chart-card">
+          <h3>Threat Distribution</h3>
+          <canvas id="threatPie" aria-label="Threat distribution"></canvas>
+        </div>
+
+        <div class="card chart-card">
+          <h3>Confidence Over Time</h3>
+          <canvas id="confidenceTrend" aria-label="Confidence trend"></canvas>
+        </div>
+      </div>
+
+      <div class="card wide chart-card">
+        <h3>Flow Volume (Last 30 Minutes)</h3>
+        <canvas id="flowTrend" aria-label="Flow volume trend"></canvas>
+      </div>
+
+      <!-- High Risk Table -->
+      <div class="card">
+        <h3>Recent High-Risk Flows</h3>
+        <div class="table-wrap">
+          <table class="data-table" id="highRiskTable">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Source IP</th>
+                <th>Destination IP</th>
+                <th>Protocol</th>
+                <th>Packets</th>
+                <th>Bytes</th>
+                <th>Label</th>
+                <th>Confidence</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function navigate(page) {
+      window.location.href = `/${page}`;
+    }
+  </script>
+
+  <script src="/static/js/analysis.js"></script>
+</body>
+</html>

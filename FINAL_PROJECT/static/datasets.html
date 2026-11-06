@@ -1,0 +1,30 @@
+<section class="page">
+  <h1>📂 Dataset Overview</h1>
+  <p>Summary of the dataset used for IDS model training and evaluation.</p>
+
+  <div class="card wide">
+    <table id="datasetTable">
+      <thead>
+        <tr><th>Feature</th><th>Example Value</th><th>Description</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    async function loadDatasetPreview() {
+      const res = await fetch('/history');
+      const data = await res.json();
+      if (data.length === 0) return;
+
+      const sample = data[0];
+      const tbody = document.querySelector('#datasetTable tbody');
+      Object.entries(sample).forEach(([k, v]) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${k}</td><td>${v}</td><td>-</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+    loadDatasetPreview();
+  </script>
+</section>

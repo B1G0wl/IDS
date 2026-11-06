@@ -1,0 +1,43 @@
+<section class="page">
+  <h1>⚙️ IDS Settings & Maintenance</h1>
+  <p>Manage stored flow data and system configuration.</p>
+
+  <div class="card">
+    <h3>Data Controls</h3>
+    <button id="clearHistoryBtn">🧹 Clear All History</button>
+    <button id="exportBtn">📤 Export History (JSON)</button>
+  </div>
+
+  <div class="card wide">
+    <h3>Server Info</h3>
+    <p><strong>Backend:</strong> Flask + Socket.IO</p>
+    <p><strong>Host:</strong> 127.0.0.1:5000</p>
+    <p><strong>Status:</strong> <span id="status">Checking...</span></p>
+  </div>
+
+  <script>
+    async function checkServer() {
+      const res = await fetch('/history');
+      document.getElementById('status').textContent = res.ok ? '✅ Online' : '❌ Offline';
+    }
+
+    document.getElementById('clearHistoryBtn').addEventListener('click', async () => {
+      if (!confirm('Delete all stored flows?')) return;
+      const res = await fetch('/clear_history', { method: 'POST' });
+      if (res.ok) alert('🧹 Cleared successfully!');
+      else alert('❌ Failed to clear.');
+    });
+
+    document.getElementById('exportBtn').addEventListener('click', async () => {
+      const res = await fetch('/history');
+      const data = await res.json();
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'flow_history_export.json';
+      a.click();
+    });
+
+    checkServer();
+  </script>
+</section>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI-IDS Dashboard</title>
+  <link rel="stylesheet" href="static/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>🧠 AI-IDS</h2>
+      <nav>
+        <ul>
+          <li class="active" onclick="navigate('dashboard')">📊 Dashboard</li>
+          <li onclick="navigate('analysis')">🔍 Live Analysis</li>
+          <li onclick="navigate('training')">⚙️ Model Training</li>
+          <li onclick="navigate('datasets')">🗂 Dataset Manager</li>
+          <li onclick="navigate('settings')">⚙️ Settings</li>
+        </ul>
+      </nav>
+      <button id="clearBtn" class="clear-btn">🧹 Clear All</button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <header>
+        <h1>Real-Time Intrusion Detection</h1>
+        <p id="status" class="status">🟢 Live Feed Active</p>
+      </header>
+
+      <!-- Dashboard Section -->
+      <section id="dashboard" class="section visible">
+        <div class="cards">
+          <div class="card">
+            <h2>Total Flows</h2>
+            <p id="totalFlows">0</p>
+          </div>
+          <div class="card alert">
+            <h2>Active Alerts</h2>
+            <p id="totalAlerts">0</p>
+          </div>
+          <div class="card safe">
+            <h2>Normal Traffic</h2>
+            <p id="normalFlows">0</p>
+          </div>
+        </div>
+
+        <h2 class="table-title">Recent Network Flows</h2>
+        <div class="table-container">
+          <table id="flowsTable">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Packets</th>
+                <th>Bytes</th>
+                <th>Prediction</th>
+                <th>Confidence</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Placeholder sections for future -->
+      <section id="analysis" class="section hidden">
+        <h2>Live Network Analysis</h2>
+        <p>Coming soon — visualize flow patterns, anomalies, and live graphs here.</p>
+      </section>
+
+      <section id="training" class="section hidden">
+        <h2>Model Training</h2>
+        <p>Train or fine-tune IDS models using latest datasets.</p>
+        <button class="train-btn">🚀 Start Training</button>
+      </section>
+
+      <section id="datasets" class="section hidden">
+        <h2>Dataset Manager</h2>
+        <p>Upload, inspect or label new datasets for analysis.</p>
+      </section>
+
+      <section id="settings" class="section hidden">
+        <h2>Settings</h2>
+        <p>Manage model configuration, API keys, and system preferences.</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+  <script src="static/main.js"></script>
+  <script>
+    function navigate(sectionId) {
+      document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+      document.querySelector(`#${sectionId}`).classList.remove('hidden');
+      document.querySelectorAll('.sidebar ul li').forEach(li => li.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>

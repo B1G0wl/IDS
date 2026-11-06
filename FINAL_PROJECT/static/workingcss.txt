@@ -1,0 +1,241 @@
+/* ====== Global Styles ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #0f172a;
+  color: #e2e8f0;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+h1, h2, h3 {
+  color: #f8fafc;
+}
+
+/* ====== Container Layout ====== */
+.container {
+  display: flex;
+  width: 100%;
+}
+
+/* ====== Sidebar ====== */
+.sidebar {
+  width: 230px;
+  background: #1e293b;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 2px solid #334155;
+}
+
+.sidebar h2 {
+  color: #38bdf8;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background: #334155;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.sidebar li:hover {
+  background: #475569;
+  transform: scale(1.02);
+}
+
+.sidebar li.active {
+  background: #0ea5e9;
+  color: #fff;
+}
+
+.clear-btn {
+  background: #ef4444;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.clear-btn:hover {
+  background: #dc2626;
+}
+
+/* ====== Main Area ====== */
+.main {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.status {
+  font-weight: 600;
+  color: #22c55e;
+}
+
+/* ====== Cards ====== */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1rem;
+  flex: 1;
+  min-width: 180px;
+  text-align: center;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  background: #283548;
+}
+
+.card.alert {
+  border-left: 6px solid #ef4444;
+}
+
+.card.safe {
+  border-left: 6px solid #22c55e;
+}
+
+/* ====== Charts ====== */
+.charts {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.chart-box {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 1rem;
+  flex: 1;
+  min-width: 300px;
+  max-width: 450px;
+  height: 280px;
+  border: 1px solid #334155;
+}
+
+.chart-box canvas {
+  width: 100%;
+  height: 200px !important;
+}
+
+/* ====== Table ====== */
+.table-title {
+  margin-bottom: 0.75rem;
+}
+
+.table-container {
+  overflow-x: auto;
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid #334155;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+th, td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid #334155;
+}
+
+th {
+  background: #334155;
+  color: #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* ====== Row Highlighting ====== */
+tr.attack-row {
+  background-color: rgba(239, 68, 68, 0.25);
+  color: #f87171;
+  font-weight: 600;
+}
+
+tr.attack-row:hover {
+  background-color: rgba(239, 68, 68, 0.35);
+}
+
+tr.normal-row {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: #86efac;
+}
+
+tr.normal-row:hover {
+  background-color: rgba(34, 197, 94, 0.2);
+}
+
+/* ====== Section Switching ====== */
+.section.hidden {
+  display: none;
+}
+
+.section.visible {
+  display: block;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 180px;
+  }
+
+  .chart-box {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .cards {
+    flex-direction: column;
+  }
+
+  .charts {
+    flex-direction: column;
+  }
+}

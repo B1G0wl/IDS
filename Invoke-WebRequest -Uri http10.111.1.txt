@@ -1,0 +1,26 @@
+Invoke-WebRequest -Uri "http://10.111.179.52:5000/ingest" -Method POST -Body (@{
+    src="192.168.0.101"
+    dst="192.168.0.10"
+    duration=2.3
+    pkts=15
+    bytes=2048
+    syn=1
+    packet_rate=7.2
+    byte_rate=900
+    syn_ratio=0.1
+    mean_pkt=136
+    std_pkt=20
+    total_flows_per_src=5
+    distinct_dst_per_src=3
+    avg_bytes_per_src=1000
+    avg_pkts_per_src=20
+    avg_duration_per_src=1.5
+    log_bytes=7.62
+    log_pkts=2.77
+    log_duration=0.83
+    log_packet_rate=1.97
+    log_byte_rate=2.95
+    is_long_flow=0
+    is_high_rate=0
+    is_many_dsts=0
+} | ConvertTo-Json) -ContentType "application/json"
